@@ -9,6 +9,7 @@
   --light-blue: rgba(121, 185, 255, 255);
   --white: rgb(255, 255, 255);
   --light-grey: rgb(221, 221, 221);
+  --green: rgb(0, 200, 0); 
 }
 
 *,
@@ -129,7 +130,8 @@ h1 {
 }
 
 .square {
-  background: var(--white);
+  background: var(--white); 
+  /* background: var(--green);  */
   border: 10px solid var(--dark-purple);
   cursor: pointer;
   float: left;
