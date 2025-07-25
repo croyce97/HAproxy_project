@@ -62,7 +62,7 @@ Local Windows Machine:
 sudo systemctl restart haproxy
 sudo systemctl enable haproxy
 ```
-Visit: http://green-game.com [green-game.com]((https://github.com/croyce97/HAproxy_project/blob/main/Images/green-game.com.jpeg))
+Visit: http://green-game.com [green-game.com](https://github.com/croyce97/HAproxy_project/blob/main/Images/green-game.com.jpeg)
 
 Visit: http://white-game.com [white-game.com](https://github.com/croyce97/HAproxy_project/blob/main/Images/white-game.com.jpeg)
 
