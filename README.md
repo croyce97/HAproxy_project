@@ -65,3 +65,54 @@ sudo systemctl enable haproxy
 Visit: http://green-app.com
 
 Visit: http://white-app.com
+
+## II. Project Architecture with HAProxy as a Load Balancer
++ VM1: 192.168.232.110: canhnq.com (HAProxy - Load Balancer) 
+
++ VM2: 192.168.232.111:3000 React App
+
++ VM3: 192.168.232.113:3000 React App
+
+
+##  Setup Instructions
+###  Step 1: Clone, install dependencies and run React apps on VM2 and VM3
+
+```
+git clone https://github.com/croyce97/HAproxy_project.git
+sudo apt update -y
+sudo apt install npm
+cd HAproxy_project
+npm start
+```
+
++ Visit: http://192.168.232.111:3000
+
++ Visit: http://192.168.232.113:3000
+###  Step 2: Install and configure HAProxy on VM1
+```
+sudo apt update
+sudo apt install haproxy -y
+sudo vi /etc/haproxy/haproxy.cfg
+```
+* Copy [haproxy_load_balancing.conf](https://github.com/croyce97/HAproxy_project/blob/main/haproxy_load_balancing.cfg) into this file.
+
+
+### Step 3: Add local DNS mapping for `canhnq.com`
+VM1: 
++ `sudo vi /etc/hosts`
++ Add `127.0.0.1  canhnq.com`
+
+Local Windows Machine: 
++ Open Notepad as Administrator
++ Open the file: `C:\Windows\System32\drivers\etc\hosts`
++ Add: `192.168.232.110    canhnq`
+
+
+###  Step 4: Restart HAProxy on VM1 and access the apps
+```
+sudo systemctl restart haproxy
+sudo systemctl enable haproxy
+```
+Visit: http://canhnq.com
+
+Visit: http://canhnq.com:8405/stats with username: `admin`, password:`admin123` to monitor.
