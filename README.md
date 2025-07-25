@@ -1,44 +1,67 @@
-
-![Tic Tac Toe](https://github.com/catherineisonline/tic-tac-toe/blob/main/src/assets/images/project-preview.png?raw=true)
-# Tic Tac Toe
+# HAProxy Reverse Proxy & Load Balancing Project
 
 
-[Tic Tac Toe](https://catherineisonline.github.io/tic-tac-toe/) game, a classic game for two players where each player takes turns marking a grid of 3x3 squares with their X or O. The player who succeeds in placing three of their marks in a horizontal, vertical, or diagonal row wins the game. It is also known as Noughts and Crosses or Xs and Os. The game is implemented using React and CSS
 
-## Game rules
+##  Overview
 
-1. The game is played on a grid that is 3 squares by 3 squares
-2. You are X, your friend is O. Players take turns putting their marks in empty squares
-3. The first player to get 3 of their marks in a row (up, down, across, or diagonally) is the winner
-4. When all 9 squares are full, the game is over
+This project demonstrates the use of HAProxy as a reverse proxy and load balancer to route traffic based on domain name. It serves two React frontend applications running on separate virtual machines.
 
-## Getting Started with Create React App
+##  Project Architecture with HAProxy as a Reverse Proxy
++ VM1: 192.168.232.110: (HAProxy - Reverse Proxy)
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
++ VM2: 192.168.232.111:3000 green-app.com React App
 
-## Available Scripts
++ VM3: 192.168.232.113:3000 white-app.com React App
 
-In the project directory, you can run:
 
-### `npm start`
+##  Setup Instructions
+###  Step 1: Clone, install dependencies and run React apps on VM2 and VM3
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```
+git clone https://github.com/croyce97/HAproxy_project.git
+sudo apt update -y
+sudo apt install npm
+```
+* On VM2:
+`sudo vi HAproxy_project/src/index.css`
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+In the .square { ... } block, replace line `background: var(--white);` with `background: var(--green);`.
+```
+cd ..
+cd HAproxy_project
+npm start
+```
 
-### `npm test`
+* On VM3:
+```
+cd HAproxy_project
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
++ Visit: http://192.168.232.111:3000
 
-### `npm run build`
++ Visit: http://192.168.232.113:3000
+###  Step 2: Install and configure HAProxy on VM1
+```
+sudo apt update
+sudo apt install haproxy -y
+sudo vi /etc/haproxy/haproxy.cfg
+```
+* Copy [haproxy_reverse_proxy.conf](https://github.com/croyce97/HAproxy_project/blob/main/haproxy_reverse_proxy.cfg) into this file.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Step 3: Add local DNS mapping for `white-game.com` and `green-game.com`
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Local Windows Machine: 
++ Open Notepad as Administrator
++ Open the file: `C:\Windows\System32\drivers\etc\hosts`
++ Add: `192.168.232.110    white-game.com green-game.com`
+
+###  Step 4: Restart HAProxy on VM1 and access the apps
+```
+sudo systemctl restart haproxy
+sudo systemctl enable haproxy
+```
+Visit: http://green-app.com
+
+Visit: http://white-app.com
