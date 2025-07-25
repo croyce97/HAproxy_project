@@ -1,4 +1,4 @@
-# I. HAProxy Reverse Proxy & Load Balancing Project
+#  HAProxy Reverse Proxy & Load Balancing Project
 
 
 
@@ -6,7 +6,7 @@
 
 This project demonstrates the use of HAProxy as a reverse proxy and load balancer to route traffic based on domain name. It serves two React frontend applications running on separate virtual machines.
 
-##  Project Architecture with HAProxy as a Reverse Proxy
+## I. Project Architecture with HAProxy as a Reverse Proxy
 + VM1: 192.168.232.110: (HAProxy - Reverse Proxy)
 
 + VM2: 192.168.232.111:3000 green-app.com React App
