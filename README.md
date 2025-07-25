@@ -62,9 +62,9 @@ Local Windows Machine:
 sudo systemctl restart haproxy
 sudo systemctl enable haproxy
 ```
-Visit: http://green-app.com
+Visit: http://green-game.com [green-game.com]((https://github.com/croyce97/HAproxy_project/blob/main/Images/green-game.com.jpeg))
 
-Visit: http://white-app.com
+Visit: http://white-game.com [white-game.com](https://github.com/croyce97/HAproxy_project/blob/main/Images/white-game.com.jpeg)
 
 ## II. Project Architecture with HAProxy as a Load Balancer
 + VM1: 192.168.232.110: canhnq.com (HAProxy - Load Balancer) 
@@ -113,6 +113,6 @@ Local Windows Machine:
 sudo systemctl restart haproxy
 sudo systemctl enable haproxy
 ```
-Visit: http://canhnq.com
+Visit: http://canhnq.com [canhnq.com](https://github.com/croyce97/HAproxy_project/blob/main/Images/canhnq.com.jpeg)
 
-Visit: http://canhnq.com:8405/stats with username: `admin`, password:`admin123` to monitor.
+Visit: http://canhnq.com:8405/stats with username: `admin`, password:`admin123` to monitor. [canhnq.com:8405/stats](https://github.com/croyce97/HAproxy_project/blob/main/Images/LB-stats.jpeg)
